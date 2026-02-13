@@ -16,7 +16,7 @@ text-align:center;
 background:black;
 }
 
-/* VIDEO */
+/* VIDEO BACKGROUND */
 video{
 position:fixed;
 top:0;left:0;
@@ -39,7 +39,7 @@ from{background-position:0 0;}
 to{background-position:1000px 1000px;}
 }
 
-/* SCREEN */
+/* SCREENS */
 .screen{
 position:absolute;
 width:100%;height:100vh;
@@ -65,7 +65,6 @@ color:white;
 transition:0.3s;
 }
 button:hover{transform:scale(1.1);}
-
 input{
 padding:12px;
 font-size:18px;
@@ -119,6 +118,16 @@ animation:fall linear forwards;
 to{transform:translateY(100vh);}
 }
 
+/* ROMANTIC FINAL MESSAGE */
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+@keyframes glow{
+from{text-shadow:0 0 10px #ff69b4;}
+to{text-shadow:0 0 40px #ff1493;}
+}
+
 canvas{
 position:fixed;
 top:0;left:0;
@@ -133,7 +142,7 @@ pointer-events:none;
 <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
 </audio>
 
-<!-- VIDEO -->
+<!-- VIDEO BACKGROUND -->
 <video autoplay muted loop>
 <source src="https://cdn.coverr.co/videos/coverr-night-sky-1579/1080p.mp4" type="video/mp4">
 </video>
@@ -141,7 +150,7 @@ pointer-events:none;
 <div class="stars"></div>
 <canvas id="confetti"></canvas>
 
-<!-- PASSWORD -->
+<!-- PASSWORD SCREEN -->
 <div class="screen" id="passwordScreen">
 <h1>Bettuuu 💗</h1>
 <p>Enter our secret word 🥹</p>
@@ -149,14 +158,12 @@ pointer-events:none;
 <button onclick="unlock()">Unlock</button>
 </div>
 
-<!-- MAIN -->
+<!-- MAIN SCREEN -->
 <div class="screen hidden" id="mainScreen" style="overflow:auto;">
-
 <h1>My Forever Person 💖</h1>
 <button onclick="startStory()">Continue</button>
 
 <div id="story" style="display:none;">
-
 <div class="polaroid">
 <img id="slideImg" src="photo1.jpg">
 </div>
@@ -166,10 +173,8 @@ pointer-events:none;
 <div class="ringBox" id="ringBox">💍</div>
 
 <h1 style="margin-top:20px;">Will You Be Mine Forever?</h1>
-
 <button onclick="celebrate()">YES 💖</button>
 <button onclick="noTrap()">NO 😏</button>
-
 </div>
 </div>
 
@@ -181,11 +186,12 @@ let p=document.getElementById("pass").value;
 if(p==="bettuuu"){
 document.getElementById("passwordScreen").classList.add("hidden");
 document.getElementById("mainScreen").classList.remove("hidden");
+}else{
+alert("Wrong password 😌");
 }
-else{alert("Wrong password, cutie 😌");}
 }
 
-/* SLIDESHOW */
+/* POLAROID SLIDESHOW */
 let images=["photo1.jpg","photo2.jpg","photo3.jpg"];
 let index=0;
 setInterval(()=>{
@@ -193,7 +199,7 @@ index=(index+1)%images.length;
 document.getElementById("slideImg").src=images[index];
 },3000);
 
-/* TYPEWRITER */
+/* TYPEWRITER LETTER */
 const text=`My Bettuuu,
 
 You are my safe place, my calm, my happiness.
@@ -211,18 +217,19 @@ setTimeout(type,40);
 }
 }
 
+/* START STORY */
 function startStory(){
 document.getElementById("story").style.display="block";
 type();
 document.getElementById("ringBox").style.display="block";
 }
 
-/* NO TRAP */
+/* NO BUTTON TRAP */
 function noTrap(){
 alert("Nice try 😏 You don’t have that option.");
 }
 
-/* CONFETTI */
+/* CONFETTI + ROMANTIC FINAL */
 const canvas=document.getElementById("confetti");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
@@ -230,14 +237,10 @@ canvas.height=window.innerHeight;
 let pieces=[];
 function celebrate(){
 for(let i=0;i<150;i++){
-pieces.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*6+4,
-d:Math.random()*canvas.height
-});
+pieces.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*6+4,d:Math.random()*canvas.height});
 }
 draw();
+setTimeout(()=>{romanticFinal();},1500);
 }
 function draw(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -258,9 +261,9 @@ let p=pieces[i];
 p.y+=Math.cos(p.d)+3;
 if(p.y>canvas.height){p.y=0;}
 }
+}
 
 /* HEARTS */
-}
 setInterval(()=>{
 let heart=document.createElement("div");
 heart.classList.add("heart");
@@ -270,6 +273,42 @@ heart.style.animationDuration=(Math.random()*3+2)+"s";
 document.body.appendChild(heart);
 setTimeout(()=>heart.remove(),5000);
 },300);
+
+/* ROMANTIC FINAL MESSAGE */
+function romanticFinal(){
+document.body.innerHTML += `
+<div id="romanticFinal" style="
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+animation:fadeIn 2s ease forwards;
+text-align:center;
+padding:20px;
+">
+<h1 style="
+font-size:70px;
+color:#ff69b4;
+text-shadow:0 0 20px #ff69b4;
+animation:glow 2s infinite alternate;
+">I Love You Bettuuu 💗</h1>
+<p style="font-size:28px;margin-top:30px;max-width:800px;line-height:1.6;">
+From this moment to every lifetime after this one,
+I choose you.
+In every universe.
+In every version of us.
+Forever isn’t enough with you.
+</p>
+<div style="font-size:80px;margin-top:40px;">💍💖🌹</div>
+</div>
+`;
+}
 
 </script>
 
