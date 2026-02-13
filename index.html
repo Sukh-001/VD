@@ -165,13 +165,14 @@ pointer-events:none;
 <body>
 
 <!-- MUSIC -->
-<audio autoplay loop>
-<source src="Jhol (acoustic)  Maanu X Annural Khalid.mp3" type="audio/mp3">
+<audio id="bgMusic" loop>
+  <source src="Jhol (acoustic)  Maanu X Annural Khalid.mp3" type="audio/mp3">
 </audio>
+
 
 <!-- VIDEO BACKGROUND -->
 <video autoplay muted loop>
-<source src="413D8E1A-6039-4C11-B87F-2A884F2EA73D.MP4" type="video/mp4">
+<source src="https://cdn.coverr.co/videos/coverr-night-sky-1579/1080p.mp4" type="video/mp4">
 </video>
 
 <div class="stars"></div>
@@ -254,14 +255,20 @@ window.onload = function() {
 
 // --- PASSWORD ---
 function unlock(){
-let p=document.getElementById("pass").value;
-if(p==="1927"){
-document.getElementById("passwordScreen").classList.add("hidden");
-document.getElementById("mainScreen").classList.remove("hidden");
-}else{
-alert("Wrong password 😌");
+  let p = document.getElementById("pass").value;
+  if(p === "bettuuu"){
+    document.getElementById("passwordScreen").classList.add("hidden");
+    document.getElementById("mainScreen").classList.remove("hidden");
+
+    // Play music safely after user interaction
+    let music = document.getElementById("bgMusic");
+    music.volume = 0.5; // optional: set volume
+    music.play();
+  } else {
+    alert("Wrong password babe😌");
+  }
 }
-}
+
 
 // --- POLAROID SLIDESHOW ---
 let images=["IMG_3906.JPG","IMG_5827.PNG","View recent photos.png","IMG_1140.JPG","IMG_2242.JPG","IMG_5829.PNG","IMG_5831.JPG","IMG_5832.JPG","IMG_5833.JPG","IMG_5834.JPG"];
