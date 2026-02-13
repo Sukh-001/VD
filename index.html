@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Bettuuu 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{
+overflow:hidden;
+color:white;
+text-align:center;
+background:black;
+}
+
+/* VIDEO */
+video{
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+object-fit:cover;
+z-index:-3;
+}
+
+/* STARS */
+.stars{
+position:fixed;
+width:100%;height:100%;
+background:url('https://www.transparenttextures.com/patterns/stardust.png');
+animation:moveStars 60s linear infinite;
+opacity:0.5;
+z-index:-2;
+}
+@keyframes moveStars{
+from{background-position:0 0;}
+to{background-position:1000px 1000px;}
+}
+
+/* SCREEN */
+.screen{
+position:absolute;
+width:100%;height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+transition:1s;
+}
+.hidden{opacity:0;pointer-events:none;}
+
+h1{font-size:65px;margin-bottom:20px;}
+button{
+padding:18px 45px;
+font-size:24px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+margin:15px;
+background:#ff69b4;
+color:white;
+transition:0.3s;
+}
+button:hover{transform:scale(1.1);}
+
+input{
+padding:12px;
+font-size:18px;
+border-radius:30px;
+border:none;
+text-align:center;
+}
+
+/* POLAROID */
+.polaroid{
+width:340px;
+background:white;
+padding:15px;
+border-radius:20px;
+color:#ff1493;
+box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+.polaroid img{
+width:100%;
+border-radius:15px;
+}
+
+/* RING BOX */
+.ringBox{
+font-size:100px;
+margin-top:20px;
+display:none;
+animation:pop 1s ease forwards;
+}
+@keyframes pop{
+0%{transform:scale(0);}
+100%{transform:scale(1);}
+}
+
+/* NOTE */
+.note{
+max-width:750px;
+font-size:22px;
+margin-top:30px;
+line-height:1.6;
+}
+
+/* HEARTS */
+.heart{
+position:fixed;
+top:-10px;
+font-size:22px;
+animation:fall linear forwards;
+}
+@keyframes fall{
+to{transform:translateY(100vh);}
+}
+
+canvas{
+position:fixed;
+top:0;left:0;
+pointer-events:none;
+}
+</style>
+</head>
+<body>
+
+<!-- MUSIC -->
+<audio autoplay loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<!-- VIDEO -->
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-night-sky-1579/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="stars"></div>
+<canvas id="confetti"></canvas>
+
+<!-- PASSWORD -->
+<div class="screen" id="passwordScreen">
+<h1>Bettuuu 💗</h1>
+<p>Enter our secret word 🥹</p>
+<input type="password" id="pass">
+<button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- MAIN -->
+<div class="screen hidden" id="mainScreen" style="overflow:auto;">
+
+<h1>My Forever Person 💖</h1>
+<button onclick="startStory()">Continue</button>
+
+<div id="story" style="display:none;">
+
+<div class="polaroid">
+<img id="slideImg" src="photo1.jpg">
+</div>
+
+<div class="note" id="typeText"></div>
+
+<div class="ringBox" id="ringBox">💍</div>
+
+<h1 style="margin-top:20px;">Will You Be Mine Forever?</h1>
+
+<button onclick="celebrate()">YES 💖</button>
+<button onclick="noTrap()">NO 😏</button>
+
+</div>
+</div>
+
+<script>
+
+/* PASSWORD */
+function unlock(){
+let p=document.getElementById("pass").value;
+if(p==="bettuuu"){
+document.getElementById("passwordScreen").classList.add("hidden");
+document.getElementById("mainScreen").classList.remove("hidden");
+}
+else{alert("Wrong password, cutie 😌");}
+}
+
+/* SLIDESHOW */
+let images=["photo1.jpg","photo2.jpg","photo3.jpg"];
+let index=0;
+setInterval(()=>{
+index=(index+1)%images.length;
+document.getElementById("slideImg").src=images[index];
+},3000);
+
+/* TYPEWRITER */
+const text=`My Bettuuu,
+
+You are my safe place, my calm, my happiness.
+Every heartbeat whispers your name.
+
+If forever exists,
+I want it with you. 💗`;
+
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("typeText").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,40);
+}
+}
+
+function startStory(){
+document.getElementById("story").style.display="block";
+type();
+document.getElementById("ringBox").style.display="block";
+}
+
+/* NO TRAP */
+function noTrap(){
+alert("Nice try 😏 You don’t have that option.");
+}
+
+/* CONFETTI */
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let pieces=[];
+function celebrate(){
+for(let i=0;i<150;i++){
+pieces.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*6+4,
+d:Math.random()*canvas.height
+});
+}
+draw();
+}
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+ctx.beginPath();
+for(let i=0;i<pieces.length;i++){
+let p=pieces[i];
+ctx.moveTo(p.x,p.y);
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+}
+ctx.fill();
+update();
+requestAnimationFrame(draw);
+}
+function update(){
+for(let i=0;i<pieces.length;i++){
+let p=pieces[i];
+p.y+=Math.cos(p.d)+3;
+if(p.y>canvas.height){p.y=0;}
+}
+
+/* HEARTS */
+}
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+},300);
+
+</script>
+
+</body>
+</html>
