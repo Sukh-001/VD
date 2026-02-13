@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forever Bettuuu 💗</title>
+<title>US💗</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 
@@ -179,7 +179,7 @@ pointer-events:none;
 
 <!-- PASSWORD SCREEN -->
 <div class="screen" id="passwordScreen">
-<h1>Bettuuu 💗</h1>
+<h1>MY LOVE💗</h1>
 <p>Enter our secret word 🥹</p>
 <input type="password" id="pass">
 <button onclick="unlock()">Unlock</button>
@@ -187,7 +187,7 @@ pointer-events:none;
 
 <!-- MAIN SCREEN -->
 <div class="screen hidden" id="mainScreen" style="overflow:auto;">
-<h1>My Forever Person 💖</h1>
+<h1>HII Cutiee! jee Aya Nu 💖</h1>
 <button onclick="startStory()">Continue</button>
 
 <div id="story" style="display:none;">
@@ -214,25 +214,56 @@ From this moment to every lifetime after this one,<br>
 I choose you.<br>
 In every universe.<br>
 In every version of us.<br>
-Forever isn’t enough with you.
+Forever isn’t enough with you.<br>
+  This is all i can do for you from such a distance💝🧿🥺<br>
+   Hope this makes you smile when you see it😌.
+   
 </p>
 <div style="font-size:80px;margin-top:40px;">💍💖🌹</div>
 </div>
 
 <script>
 
-/* PASSWORD */
+// --- VARIABLES ---
+let pieces = [];
+let i = 0;
+
+// --- ON PAGE LOAD: RESET EVERYTHING ---
+window.onload = function() {
+    // Reset confetti
+    pieces = [];
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    
+    // Reset typewriter
+    i = 0;
+    document.getElementById("typeText").innerHTML = "";
+    
+    // Hide main story & final message
+    document.getElementById("story").style.display = "none";
+    document.getElementById("ringBox").style.display = "none";
+    document.getElementById("romanticFinal").style.display = "none";
+    
+    // Show password screen
+    document.getElementById("passwordScreen").classList.remove("hidden");
+    document.getElementById("mainScreen").classList.add("hidden");
+
+    // Remove existing hearts
+    let existingHearts = document.querySelectorAll(".heart");
+    existingHearts.forEach(h => h.remove());
+};
+
+// --- PASSWORD ---
 function unlock(){
 let p=document.getElementById("pass").value;
 if(p==="bettuuu"){
 document.getElementById("passwordScreen").classList.add("hidden");
 document.getElementById("mainScreen").classList.remove("hidden");
 }else{
-alert("Wrong password babe 😌");
+alert("Wrong password 😌");
 }
 }
 
-/* POLAROID SLIDESHOW */
+// --- POLAROID SLIDESHOW ---
 let images=["IMG_3906.JPG","IMG_5827.PNG","View recent photos.png"];
 let index=0;
 setInterval(()=>{
@@ -240,8 +271,8 @@ index=(index+1)%images.length;
 document.getElementById("slideImg").src=images[index];
 },3000);
 
-/* TYPEWRITER LETTER */
-const text=`My Bettuuu,
+// --- TYPEWRITER LETTER ---
+const text=`Hello My LOve ,my guggu 😬,
 
 You are my safe place, my calm, my happiness.
 Every heartbeat whispers your name.
@@ -249,7 +280,6 @@ Every heartbeat whispers your name.
 If forever exists,
 I want it with you. 💗`;
 
-let i=0;
 function type(){
 if(i<text.length){
 document.getElementById("typeText").innerHTML+=text.charAt(i);
@@ -258,29 +288,36 @@ setTimeout(type,40);
 }
 }
 
-/* START STORY */
+// --- START STORY ---
 function startStory(){
 document.getElementById("story").style.display="block";
 type();
 document.getElementById("ringBox").style.display="block";
 }
 
-/* NO BUTTON TRAP */
+// --- NO BUTTON TRAP ---
 function noTrap(){
-alert("Nice try 😏 You don’t have that option.");
+alert("Nice try 😏 You don’t have that option babe 🙂‍↔️.");
 }
 
-/* CONFETTI + SHOW ROMANTIC FINAL */
+// --- CONFETTI + ROMANTIC FINAL ---
 const canvas=document.getElementById("confetti");
 const ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
-let pieces=[];
+
 function celebrate(){
+  // Reset confetti
+  pieces = [];
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Create confetti
   for(let i=0;i<150;i++){
     pieces.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*6+4,d:Math.random()*canvas.height});
   }
   draw();
+
+  // Show romantic final message
   setTimeout(()=>{
     document.getElementById("romanticFinal").style.display="flex";
   },1500);
@@ -307,8 +344,9 @@ p.y+=Math.cos(p.d)+3;
 if(p.y>canvas.height){p.y=0;}
 }
 
-/* HEARTS */
+// HEARTS
 }
+
 setInterval(()=>{
 let heart=document.createElement("div");
 heart.classList.add("heart");
